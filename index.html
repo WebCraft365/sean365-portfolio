@@ -407,28 +407,26 @@ section{position:relative;z-index:2}
 }
 .pill:hover{background:rgba(77,111,255,.22);border-color:var(--accent);transform:translateY(-2px)}
 
-.about-visual{position:relative;display:flex;align-items:center;justify-content:center}
-.about-card-stack{position:relative;width:340px;height:380px}
+.about-visual{position:relative;display:flex;align-items:stretch;justify-content:center}
+.about-card-stack{display:flex;flex-direction:column;gap:.85rem;width:100%}
 .stack-card{
-  position:absolute;
-  width:260px;
-  padding:1.5rem;
+  padding:1.25rem 1.5rem;
   border-radius:var(--r);
   border:1px solid rgba(77,111,255,.2);
   background:rgba(13,18,40,.7);
   backdrop-filter:blur(20px);
   -webkit-backdrop-filter:blur(20px);
-  transition:transform .5s var(--spring),box-shadow .4s;
+  display:flex;align-items:flex-start;gap:1rem;
+  transition:transform .4s var(--spring),border-color .3s,box-shadow .3s;
 }
-.stack-card:nth-child(1){top:0;left:0;transform:rotate(-4deg) translate(-10px,10px);z-index:1}
-.stack-card:nth-child(2){top:30px;left:40px;z-index:2}
-.stack-card:nth-child(3){top:60px;left:80px;transform:rotate(3deg);z-index:3}
-.about-visual:hover .stack-card:nth-child(1){transform:rotate(-7deg) translate(-30px,20px)}
-.about-visual:hover .stack-card:nth-child(2){transform:translateY(-10px)}
-.about-visual:hover .stack-card:nth-child(3){transform:rotate(5deg) translate(20px,-10px)}
-.stack-card-icon{font-size:1.5rem;margin-bottom:.75rem}
-.stack-card-title{font-family:var(--font-d);font-weight:600;font-size:.95rem;margin-bottom:.4rem}
-.stack-card-desc{font-size:.8rem;color:var(--muted-2);line-height:1.5}
+.stack-card:hover{
+  transform:translateX(6px);
+  border-color:rgba(77,111,255,.4);
+  box-shadow:0 8px 30px rgba(77,111,255,.1);
+}
+.stack-card-icon{font-size:1.6rem;flex-shrink:0;margin-top:.1rem}
+.stack-card-title{font-family:var(--font-d);font-weight:600;font-size:.95rem;margin-bottom:.3rem}
+.stack-card-desc{font-size:.82rem;color:var(--muted-2);line-height:1.55}
 
 /* ── SERVICES ────────────────────────────────────────────── */
 #services{padding:8rem 0}
@@ -667,7 +665,6 @@ footer{
   body{cursor:auto}
   button,a{cursor:pointer}
   .about-grid{grid-template-columns:1fr;gap:3rem}
-  .about-card-stack{display:none}
   .services-grid{grid-template-columns:1fr}
   .work-grid{grid-template-columns:1fr}
   .case-card:first-child{grid-column:auto}
@@ -761,40 +758,6 @@ footer{
   </div>
 </div>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="section-inner">
-    <div class="section-label reveal">About</div>
-    <h2 class="section-title reveal">Turning ideas into<br><em>digital realities</em></h2>
-    <div class="about-grid">
-      <div class="about-copy reveal">
-        <p>I'm Sean — a <strong>web designer and developer</strong> from Harare, Zimbabwe with a passion for creating websites that don't just look good, but <strong>feel alive</strong>.</p>
-        <p>My work sits at the intersection of <strong>design craft</strong> and <strong>technical execution</strong> — clean code, precise typography, intentional motion. Every pixel earns its place.</p>
-        <p>Whether you need a brand-defining landing page, a full e-commerce build, or a sleek portfolio, I bring the same obsessive attention to detail to every project.</p>
-      </div>
-      <div class="about-visual reveal">
-        <div class="about-card-stack">
-          <div class="stack-card">
-            <div class="stack-card-icon">🎨</div>
-            <div class="stack-card-title">Design First</div>
-            <div class="stack-card-desc">Every project begins with a visual strategy — no generic templates.</div>
-          </div>
-          <div class="stack-card">
-            <div class="stack-card-icon">⚡</div>
-            <div class="stack-card-title">Performance</div>
-            <div class="stack-card-desc">Sub-second load times. 95+ Lighthouse scores as standard.</div>
-          </div>
-          <div class="stack-card">
-            <div class="stack-card-icon">🚀</div>
-            <div class="stack-card-title">Launch Ready</div>
-            <div class="stack-card-desc">Fully responsive, SEO-optimized, and ready to ship on time.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- SERVICES -->
 <section id="services">
   <div class="section-inner">
@@ -844,7 +807,7 @@ footer{
 
       <div class="case-card reveal">
         <div class="case-thumb">
-          <div class="case-thumb-bg dp-bg"><div class="dp-text">DIAMOND PURE</div></div>
+          <div class="case-thumb-bg"><img src="diamond-pure.png" alt="Diamond Pure website screenshot" style="width:100%;height:100%;object-fit:cover;object-position:top"></div>
           <div class="case-logo-badge">Diamond Pure</div>
         </div>
         <div class="case-body">
@@ -862,7 +825,7 @@ footer{
 
       <div class="case-card reveal">
         <div class="case-thumb">
-          <div class="case-thumb-bg dg-bg"><div class="dg-text">DOLCETTI</div></div>
+          <div class="case-thumb-bg"><img src="gelato.png" alt="Dolcetti Gelato website screenshot" style="width:100%;height:100%;object-fit:cover;object-position:top"></div>
           <div class="case-logo-badge">Dolcetti Gelato</div>
         </div>
         <div class="case-body">
@@ -880,7 +843,7 @@ footer{
 
       <div class="case-card reveal">
         <div class="case-thumb">
-          <div class="case-thumb-bg om-bg"><div class="om-text">OM CITY</div></div>
+          <div class="case-thumb-bg"><img src="om-city-designs.png" alt="OM City Designs website screenshot" style="width:100%;height:100%;object-fit:cover;object-position:top"></div>
           <div class="case-logo-badge">OM City Designs</div>
           <span class="case-wip">In Progress</span>
         </div>
@@ -897,6 +860,40 @@ footer{
         </div>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-label reveal">About</div>
+    <h2 class="section-title reveal">Turning ideas into<br><em>digital realities</em></h2>
+    <div class="about-grid">
+      <div class="about-copy reveal">
+        <p>I'm Sean — a <strong>web designer and developer</strong> from Harare, Zimbabwe with a passion for creating websites that don't just look good, but <strong>feel alive</strong>.</p>
+        <p>My work sits at the intersection of <strong>design craft</strong> and <strong>technical execution</strong> — clean code, precise typography, intentional motion. Every pixel earns its place.</p>
+        <p>Whether you need a brand-defining landing page, a full e-commerce build, or a sleek portfolio, I bring the same obsessive attention to detail to every project.</p>
+      </div>
+      <div class="about-visual reveal">
+        <div class="about-card-stack">
+          <div class="stack-card">
+            <div class="stack-card-icon">🎨</div>
+            <div class="stack-card-title">Design First</div>
+            <div class="stack-card-desc">Every project begins with a visual strategy — no generic templates.</div>
+          </div>
+          <div class="stack-card">
+            <div class="stack-card-icon">⚡</div>
+            <div class="stack-card-title">Performance</div>
+            <div class="stack-card-desc">Fast load times, clean code, no bloat. Sites that work as good as they look.</div>
+          </div>
+          <div class="stack-card">
+            <div class="stack-card-icon">🚀</div>
+            <div class="stack-card-title">Launch Ready</div>
+            <div class="stack-card-desc">Fully responsive, SEO-optimized, and ready to ship on time.</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
