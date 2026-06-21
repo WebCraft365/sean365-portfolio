@@ -1076,15 +1076,17 @@ window.addEventListener('scroll',()=>$('#main-nav').classList.toggle('scrolled',
     btn.disabled=true;btnText.textContent='Sending…';
     try{
       const res=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{Accept:'application/json'}});
-      if(res.ok){
+      const data=await res.json();
+      if(data.success){
         btnText.textContent='Sent ✓';
         showToast('Message received — I\'ll be in touch soon!');
         form.reset();
         setTimeout(()=>{btn.disabled=false;btnText.textContent='Send Brief →'},3000);
       } else {
-        throw new Error();
+        throw new Error(data.message||'Unknown error');
       }
-    } catch {
+    } catch(err){
+      console.error('Form error:',err);
       btn.disabled=false;btnText.textContent='Send Brief →';
       showToast('Something went wrong — email me directly at seanmakonde5@gmail.com');
     }
