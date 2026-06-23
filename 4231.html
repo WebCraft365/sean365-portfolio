@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The 4·2·3·1 Content Formation — sean365</title>
+<meta name="description" content="A social media content strategy built like a football formation. By sean365.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ── TOKENS ─────────────────────────────────────── */
+:root{
+  --bg:#08080F;
+  --surface:#12121F;
+  --card:#1A1A2D;
+  --border:rgba(255,255,255,.07);
+  --accent:#4361EE;
+  --accent-2:#7B2FBE;
+  --white:#FFFFFF;
+  --body:#D0D0E8;
+  --muted:rgba(208,208,232,.5);
+  --font-d:'Bebas Neue',sans-serif;
+  --font-b:'Space Grotesk',sans-serif;
+  --ease:cubic-bezier(0.4,0,0.2,1);
+  --r:12px;
+  --c-gk:#F59E0B;
+  --c-def:#3B82F6;
+  --c-dm:#6366F1;
+  --c-am:#A855F7;
+  --c-st:#F43F5E;
+}
+
+/* ── RESET ──────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--body);font-family:var(--font-b);line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+button{border:none;background:none;font:inherit;color:inherit;cursor:pointer}
+
+/* ── SCROLL REVEAL ──────────────────────────────── */
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.reveal.in{opacity:1;transform:translateY(0)}
+.reveal-d1{transition-delay:.1s}
+.reveal-d2{transition-delay:.2s}
+.reveal-d3{transition-delay:.3s}
+.reveal-d4{transition-delay:.4s}
+
+/* ── NAV ────────────────────────────────────────── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.1rem 4vw;
+  background:rgba(8,8,15,.85);
+  border-bottom:1px solid var(--border);
+  transition:backdrop-filter .4s,-webkit-backdrop-filter .4s;
+}
+nav.scrolled{backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.nav-mark{font-family:var(--font-d);font-size:1.5rem;letter-spacing:.02em;color:var(--white);line-height:1}
+.nav-mark em{color:var(--accent);font-style:normal}
+.nav-back{
+  font-size:.82rem;font-weight:500;color:var(--muted);
+  display:flex;align-items:center;gap:.4rem;
+  transition:color .25s;
+}
+.nav-back:hover{color:var(--white)}
+
+/* ── HERO ───────────────────────────────────────── */
+#hero{
+  position:relative;
+  min-height:100vh;
+  display:flex;align-items:center;
+  padding:9rem 4vw 5rem;
+  overflow:hidden;
+}
+#hero::before{
+  content:'';
+  position:absolute;top:-180px;left:50%;
+  transform:translateX(-50%);
+  width:700px;height:700px;
+  background:radial-gradient(circle,rgba(67,97,238,.1) 0%,transparent 65%);
+  pointer-events:none;z-index:0;
+}
+.hero-inner{position:relative;z-index:1;max-width:1000px;margin:0 auto;width:100%}
+.hero-eyebrow{
+  font-size:.75rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:1.5rem;
+}
+.hero-num{
+  font-family:var(--font-d);
+  font-size:clamp(80px,18vw,200px);
+  line-height:.85;
+  color:var(--white);
+  letter-spacing:.04em;
+  margin-bottom:1.75rem;
+}
+.hero-num .dot{color:var(--accent)}
+.hero-headline{
+  font-family:var(--font-d);
+  font-size:clamp(2.2rem,5.5vw,4.5rem);
+  line-height:1.1;letter-spacing:.02em;
+  color:var(--white);
+  max-width:800px;
+  margin-bottom:1.25rem;
+}
+.hero-sub{
+  font-size:1.05rem;color:var(--body);
+  max-width:540px;line-height:1.75;
+  margin-bottom:3rem;
+}
+.hero-scroll{
+  display:flex;align-items:center;gap:.75rem;
+  font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);
+}
+.hero-scroll-line{
+  height:1px;background:var(--muted);
+  animation:scroll-line 2s var(--ease) infinite alternate;
+}
+@keyframes scroll-line{from{width:24px;opacity:.35}to{width:60px;opacity:.8}}
+
+/* ── SECTION COMMON ─────────────────────────────── */
+.section-inner{max-width:1200px;margin:0 auto;padding:0 4vw}
+.section-eyebrow{
+  font-size:.75rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:.75rem;
+}
+.section-title{
+  font-family:var(--font-d);
+  font-size:clamp(2rem,4vw,3.5rem);
+  color:var(--white);letter-spacing:.02em;line-height:1.05;
+}
+
+/* ── HOOK SECTION ───────────────────────────────── */
+#hook{padding:7rem 0}
+.hook-inner{max-width:660px;margin:0 auto;padding:0 4vw;text-align:center}
+.hook-title{
+  font-family:var(--font-d);
+  font-size:clamp(2rem,4vw,3rem);
+  color:var(--white);letter-spacing:.02em;
+  margin-bottom:1.5rem;
+}
+.hook-body{font-size:1rem;color:var(--body);line-height:1.8;margin-bottom:1rem}
+.hook-quote{
+  margin-top:2.5rem;padding:1.5rem 2rem;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--r);
+  font-style:italic;color:var(--muted);
+  font-size:1rem;line-height:1.7;
+  text-align:left;
+}
+.hook-quote::before{
+  content:'"';
+  display:block;
+  font-family:var(--font-d);
+  font-size:3rem;color:var(--accent);
+  line-height:.8;margin-bottom:.75rem;
+  font-style:normal;
+}
+
+/* ── PITCH SECTION ──────────────────────────────── */
+#pitch-section{padding:7rem 0}
+.pitch-header{margin-bottom:3rem}
+.pitch-layout{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:2.5rem;
+  align-items:start;
+}
+
+/* Pitch container */
+.pitch-wrap{position:relative;width:100%}
+.pitch{
+  position:relative;
+  width:100%;
+  aspect-ratio:68/105;
+  background:#1B5E2A;
+  border-radius:8px;
+  overflow:hidden;
+  border:2px solid rgba(255,255,255,.25);
+}
+.pitch-svg{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  pointer-events:none;z-index:1;
+}
+.player{
+  position:absolute;
+  width:clamp(28px,4.5vw,40px);
+  height:clamp(28px,4.5vw,40px);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-b);
+  font-size:clamp(.45rem,.7vw,.62rem);
+  font-weight:700;letter-spacing:.02em;
+  color:#fff;
+  cursor:pointer;
+  transform:translate(-50%,-50%) scale(0);
+  transition:transform .4s var(--ease),box-shadow .25s,border-color .25s;
+  border:2px solid rgba(255,255,255,.3);
+  user-select:none;
+  z-index:10;
+  text-align:center;
+  line-height:1.1;
+}
+.player.in{transform:translate(-50%,-50%) scale(1)}
+.player:hover{transform:translate(-50%,-50%) scale(1.12);border-color:rgba(255,255,255,.7)}
+.player.active{transform:translate(-50%,-50%) scale(1.15);border-color:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.3)}
+
+/* Content panel */
+.content-panel{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--r);
+  padding:2rem;
+  min-height:480px;
+  display:flex;flex-direction:column;justify-content:center;
+  position:relative;
+  overflow:hidden;
+}
+.panel-default{
+  text-align:center;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:.75rem;height:100%;
+  transition:opacity .3s;
+}
+.panel-default-icon{
+  width:56px;height:56px;border-radius:50%;
+  background:var(--surface);
+  border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;
+  margin-bottom:.5rem;
+}
+.panel-default p{color:var(--muted);font-size:.9rem;max-width:200px;line-height:1.6}
+
+.panel-content{
+  display:none;
+  flex-direction:column;gap:1rem;
+  opacity:0;transform:translateX(24px);
+  transition:opacity .4s var(--ease),transform .4s var(--ease);
+}
+.panel-content.active{display:flex}
+.panel-content.in{opacity:1;transform:translateX(0)}
+.panel-badge{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.3rem .85rem;
+  border-radius:100px;
+  font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  border:1px solid currentColor;
+  width:fit-content;
+}
+.panel-role{
+  font-family:var(--font-d);
+  font-size:clamp(1.4rem,2.5vw,2.2rem);
+  color:var(--white);letter-spacing:.03em;
+  line-height:1.1;
+}
+.panel-hook{font-size:.95rem;color:var(--body);line-height:1.7}
+.panel-question{font-style:italic;color:var(--muted);font-size:.88rem;line-height:1.65}
+.panel-list{display:flex;flex-direction:column;gap:.55rem}
+.panel-list-item{
+  display:flex;align-items:flex-start;gap:.7rem;
+  font-size:.88rem;color:var(--body);line-height:1.5;
+}
+.panel-dot{
+  width:6px;height:6px;border-radius:50%;
+  flex-shrink:0;margin-top:.45rem;
+}
+.panel-insight{
+  border-left:3px solid;
+  padding:.75rem 1rem;
+  font-style:italic;color:var(--muted);
+  font-size:.88rem;line-height:1.6;
+  background:rgba(255,255,255,.02);
+  border-radius:0 6px 6px 0;
+}
+
+/* ── BREAKDOWN CARDS ────────────────────────────── */
+#breakdown{padding:5rem 0 7rem}
+.breakdown-grid{display:flex;flex-direction:column;gap:1rem;margin-top:3rem}
+.b-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--r);
+  padding:1.75rem 2rem;
+  cursor:pointer;
+  transition:transform .35s var(--ease),background .25s,border-color .25s;
+  display:grid;
+  grid-template-columns:180px 1fr;
+  gap:1.75rem;
+  align-items:center;
+}
+.b-card:hover{transform:translateX(5px);background:rgba(255,255,255,.015);border-color:rgba(255,255,255,.12)}
+.b-card-left{
+  display:flex;flex-direction:column;gap:.4rem;
+  border-right:1px solid var(--border);
+  padding-right:1.75rem;
+}
+.b-card-pos{
+  font-family:var(--font-d);
+  font-size:1.75rem;letter-spacing:.04em;
+  line-height:1;
+}
+.b-card-label{font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.b-card-title{
+  font-family:var(--font-d);
+  font-size:1.5rem;color:var(--white);letter-spacing:.02em;
+  margin-bottom:.4rem;
+}
+.b-card-hook{font-size:.88rem;color:var(--muted);line-height:1.6}
+.b-card-arrow{
+  font-size:.85rem;color:var(--muted);
+  transition:color .25s,transform .35s var(--ease);
+  align-self:center;justify-self:end;
+  padding-left:1rem;
+}
+.b-card:hover .b-card-arrow{color:var(--white);transform:translateX(4px)}
+
+/* ── CTA SECTION ────────────────────────────────── */
+#cta{padding:7rem 0;text-align:center}
+.cta-inner{max-width:600px;margin:0 auto;padding:0 4vw}
+.cta-available{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:1.5rem;
+}
+.cta-dot{
+  width:7px;height:7px;border-radius:50%;
+  background:#22D395;
+  animation:pulse-dot 2s ease-in-out infinite;
+  flex-shrink:0;
+}
+@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.8)}}
+.cta-title{margin-bottom:1rem}
+.cta-sub{font-size:1rem;color:var(--muted);margin-bottom:2.5rem;line-height:1.75}
+.cta-btns{display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap}
+.btn-fill{
+  background:var(--accent);color:#fff;
+  padding:.85rem 1.85rem;border-radius:var(--r);
+  font-size:.9rem;font-weight:600;
+  display:inline-flex;align-items:center;gap:.4rem;
+  transition:transform .35s var(--ease),background .25s;
+}
+.btn-fill:hover{background:#3451d1;transform:translateY(-2px)}
+.btn-outline{
+  border:1px solid var(--border);color:var(--body);
+  padding:.85rem 1.85rem;border-radius:var(--r);
+  font-size:.9rem;font-weight:600;
+  display:inline-flex;align-items:center;gap:.4rem;
+  transition:border-color .25s,transform .35s var(--ease);
+}
+.btn-outline:hover{border-color:rgba(255,255,255,.22);transform:translateY(-2px)}
+
+/* ── FOOTER ─────────────────────────────────────── */
+footer{
+  border-top:1px solid var(--border);
+  padding:2.5rem 4vw;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:2rem;
+  align-items:center;
+}
+.foot-left{}
+.foot-mark{font-family:var(--font-d);font-size:1.3rem;letter-spacing:.02em;color:var(--white);line-height:1}
+.foot-mark em{color:var(--accent);font-style:normal}
+.foot-tagline{font-size:.78rem;color:var(--muted);margin-top:.35rem}
+.foot-right{display:flex;flex-direction:column;align-items:flex-end;gap:.4rem}
+.foot-contact{display:flex;flex-direction:column;gap:.2rem;align-items:flex-end}
+.foot-contact a,.foot-contact span{font-size:.8rem;color:var(--muted);transition:color .2s}
+.foot-contact a:hover{color:var(--white)}
+.foot-year{font-size:.72rem;color:rgba(208,208,232,.25);margin-top:.25rem}
+
+/* ── RESPONSIVE ─────────────────────────────────── */
+@media(max-width:768px){
+  .pitch-layout{grid-template-columns:1fr}
+  .content-panel{min-height:auto;margin-top:1.5rem}
+  .panel-content{transform:translateY(16px)}
+  .panel-content.in{transform:translateY(0)}
+  .b-card{grid-template-columns:1fr;gap:1rem}
+  .b-card-left{border-right:none;border-bottom:1px solid var(--border);padding-right:0;padding-bottom:1rem}
+  .b-card-arrow{justify-self:start}
+  .cta-btns{flex-direction:column;align-items:stretch}
+  footer{grid-template-columns:1fr;gap:1.5rem}
+  .foot-right{align-items:flex-start}
+  .foot-contact{align-items:flex-start}
+}
+@media(max-width:480px){
+  .hero-num{font-size:clamp(60px,18vw,96px)}
+  .b-card{padding:1.25rem}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  .reveal{opacity:1;transform:none}
+  .player{transform:translate(-50%,-50%) scale(1)!important}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a href="index.html" class="nav-mark">sean<em>365</em></a>
+  <a href="index.html" class="nav-back">← Back to Portfolio</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow reveal">Content Strategy by sean365</p>
+    <div class="hero-num reveal reveal-d1">4<span class="dot">·</span>2<span class="dot">·</span>3<span class="dot">·</span>1</div>
+    <h1 class="hero-headline reveal reveal-d2">Your customers are your<br>content strategy.</h1>
+    <p class="hero-sub reveal reveal-d3">Most businesses wake up and post randomly. Today we build a strategy using football.</p>
+    <div class="hero-scroll reveal reveal-d4">
+      <div class="hero-scroll-line"></div>
+      <span>Scroll to explore</span>
+    </div>
+  </div>
+</section>
+
+<!-- HOOK -->
+<section id="hook">
+  <div class="hook-inner">
+    <h2 class="hook-title reveal">Why most content doesn't work.</h2>
+    <p class="hook-body reveal reveal-d1">Every successful football team has a defined formation. Each player knows their role, their zone, and their responsibility. When everyone is in position, the team creates chances and scores goals.</p>
+    <p class="hook-body reveal reveal-d2">Your social media works exactly the same way. Post randomly and you're playing without a formation — running everywhere, covering nothing, converting no one.</p>
+    <blockquote class="hook-quote reveal reveal-d3">
+      The 4·2·3·1 Content Formation gives every post a position, a purpose, and a place in the strategy. Build it once. Run it forever.
+    </blockquote>
+  </div>
+</section>
+
+<!-- INTERACTIVE PITCH -->
+<section id="pitch-section">
+  <div class="section-inner">
+    <div class="pitch-header">
+      <p class="section-eyebrow reveal">The Formation</p>
+      <h2 class="section-title reveal reveal-d1">Click any position<br>to reveal its content role.</h2>
+    </div>
+
+    <div class="pitch-layout">
+      <!-- THE PITCH -->
+      <div class="pitch-wrap">
+        <div class="pitch" id="pitch" role="group" aria-label="4-2-3-1 formation pitch">
+          <!-- SVG pitch markings -->
+          <svg class="pitch-svg" viewBox="0 0 68 105" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="0.6" aria-hidden="true">
+            <!-- Outer border -->
+            <rect x="1.5" y="1.5" width="65" height="102" rx="1"/>
+            <!-- Center line -->
+            <line x1="1.5" y1="52.5" x2="66.5" y2="52.5"/>
+            <!-- Center circle -->
+            <circle cx="34" cy="52.5" r="9.15"/>
+            <!-- Center dot -->
+            <circle cx="34" cy="52.5" r="0.8" fill="rgba(255,255,255,.5)" stroke="none"/>
+            <!-- Top penalty area -->
+            <rect x="13.84" y="1.5" width="40.32" height="16.5"/>
+            <!-- Top goal area -->
+            <rect x="24.84" y="1.5" width="18.32" height="5.5"/>
+            <!-- Top goal net indicator -->
+            <rect x="28" y=".5" width="12" height="1.5" fill="rgba(255,255,255,.3)" stroke="none"/>
+            <!-- Bottom penalty area -->
+            <rect x="13.84" y="87" width="40.32" height="16.5"/>
+            <!-- Bottom goal area -->
+            <rect x="24.84" y="98" width="18.32" height="5.5"/>
+            <!-- Bottom goal net indicator -->
+            <rect x="28" y="103" width="12" height="1.5" fill="rgba(255,255,255,.3)" stroke="none"/>
+          </svg>
+          <!-- Players injected by JS -->
+        </div>
+      </div>
+
+      <!-- CONTENT PANEL -->
+      <div class="content-panel" id="content-panel">
+        <div class="panel-default" id="panel-default">
+          <div class="panel-default-icon">⚽</div>
+          <p>Click any player position on the pitch to reveal their content role and strategy.</p>
+        </div>
+        <!-- Panel content populated by JS -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMATION BREAKDOWN -->
+<section id="breakdown">
+  <div class="section-inner">
+    <p class="section-eyebrow reveal">Formation Breakdown</p>
+    <h2 class="section-title reveal reveal-d1">All 5 content layers,<br>explained.</h2>
+    <div class="breakdown-grid" id="breakdown-grid"></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta-inner">
+    <div class="cta-available reveal">
+      <span class="cta-dot"></span>
+      Available for freelance work
+    </div>
+    <h2 class="section-title cta-title reveal reveal-d1">Ready to build<br>your formation?</h2>
+    <p class="cta-sub reveal reveal-d2">If this framework resonated, imagine what a fully custom content strategy could do for your business. Let's build it together.</p>
+    <div class="cta-btns reveal reveal-d3">
+      <a href="mailto:seanmakonde5@gmail.com" class="btn-fill">Work with sean365 →</a>
+      <a href="https://linkedin.com/in/sean-makonde" target="_blank" rel="noopener" class="btn-outline">Connect on LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-left">
+    <div class="foot-mark">sean<em>365</em></div>
+    <div class="foot-tagline">Built in Harare. Designed to move the world.</div>
+  </div>
+  <div class="foot-right">
+    <div class="foot-contact">
+      <a href="mailto:seanmakonde5@gmail.com">seanmakonde5@gmail.com</a>
+      <a href="tel:+263773697859">+263 773 697 859</a>
+      <a href="https://linkedin.com/in/sean-makonde" target="_blank" rel="noopener">linkedin.com/in/sean-makonde</a>
+    </div>
+    <div class="foot-year">© 2025 sean365</div>
+  </div>
+</footer>
+
+<script>
+/* ── DATA ──────────────────────────────────────────── */
+const CONTENT = {
+  GK: {
+    group:'GK', groupLabel:'Goalkeeper', role:'Your Online Presence',
+    color:'#F59E0B',
+    hook:"If someone searches your business tonight — what do they find?",
+    question:"Can they find you? Can they contact you? Do they trust what they see?",
+    items:[
+      "Clear professional profile picture",
+      "Bio that explains what you do and who you serve",
+      "Contact details that are easy to find",
+      "WhatsApp button for instant reach",
+      "Your location — people want to know you're real"
+    ],
+    insight:"Without a goalkeeper, the whole team suffers."
+  },
+  DEF: {
+    group:'BACK FOUR', groupLabel:'Defenders', role:'Visibility Content',
+    color:'#3B82F6',
+    hook:"These posts keep you consistently visible.",
+    question:null,
+    items:[
+      "Behind the scenes moments",
+      "Deliveries and order fulfilment",
+      "Packaging your product",
+      "Team activities and your crew",
+      "Your business journey — wins and lessons"
+    ],
+    insight:"People buy from people. Let them see the human side."
+  },
+  DM: {
+    group:'DMs', groupLabel:'Defensive Midfielders', role:'Trust Content',
+    color:'#6366F1',
+    hook:"These posts protect your brand and build your reputation.",
+    question:"Why should someone trust you? If your page doesn't answer that question, you have work to do.",
+    items:[
+      "Customer testimonials — in their own words",
+      "Reviews — let your clients speak for you",
+      "Before and after results",
+      "Success stories and transformations"
+    ],
+    insight:"Trust is your biggest conversion tool. Build it in public."
+  },
+  AM: {
+    group:'AMs', groupLabel:'Attacking Midfielders', role:'Problem-Solving Content',
+    color:'#A855F7',
+    hook:"This is the heart of your strategy. Most of your content should live here.",
+    question:null,
+    items:[
+      "What's included in your product or service?",
+      "How much does it cost — be transparent",
+      "How long does it take?",
+      "Why should I choose you over the rest?",
+      "How does your process actually work?"
+    ],
+    insight:"Stop selling. Start solving."
+  },
+  ST: {
+    group:'ST', groupLabel:'Striker', role:'Sales Content',
+    color:'#F43F5E',
+    hook:"This is where you ask for the sale. Use it sparingly. Use it well.",
+    question:"Most businesses only post striker content — then wonder why engagement drops.",
+    items:[
+      "New stock arrivals",
+      "Limited-time promotions",
+      "Product and service launches",
+      "Offers and deals"
+    ],
+    insight:"The best businesses educate first. Sell second."
+  }
+};
+
+/* Player positions: id, label, left%, top%, content key */
+const PLAYERS = [
+  {id:'ST',  label:'ST',  x:50,  y:11, key:'ST'},
+  {id:'LAM', label:'LAM', x:17,  y:27, key:'AM'},
+  {id:'CAM', label:'CAM', x:50,  y:24, key:'AM'},
+  {id:'RAM', label:'RAM', x:83,  y:27, key:'AM'},
+  {id:'LDM', label:'LDM', x:33,  y:43, key:'DM'},
+  {id:'RDM', label:'RDM', x:67,  y:43, key:'DM'},
+  {id:'LB',  label:'LB',  x:8,   y:63, key:'DEF'},
+  {id:'LCB', label:'LCB', x:31,  y:64, key:'DEF'},
+  {id:'RCB', label:'RCB', x:69,  y:64, key:'DEF'},
+  {id:'RB',  label:'RB',  x:92,  y:63, key:'DEF'},
+  {id:'GK',  label:'GK',  x:50,  y:83, key:'GK'}
+];
+
+/* ── RENDER PLAYERS ─────────────────────────────────── */
+const pitch = document.getElementById('pitch');
+const panel = document.getElementById('content-panel');
+const panelDefault = document.getElementById('panel-default');
+
+PLAYERS.forEach((p, i) => {
+  const c = CONTENT[p.key];
+  const el = document.createElement('div');
+  el.className = 'player';
+  el.id = 'player-' + p.id;
+  el.style.cssText = `left:${p.x}%;top:${p.y}%;background:${c.color};`;
+  el.style.transitionDelay = i * 80 + 'ms';
+  el.setAttribute('role','button');
+  el.setAttribute('tabindex','0');
+  el.setAttribute('aria-label', `${p.label} — ${c.role}`);
+  el.textContent = p.label;
+  el.addEventListener('click', () => showPanel(p.key, el));
+  el.addEventListener('keydown', e => { if(e.key==='Enter'||e.key===' '){e.preventDefault();showPanel(p.key,el)} });
+  pitch.appendChild(el);
+});
+
+/* ── SHOW PANEL ─────────────────────────────────────── */
+let activeKey = null;
+let activeEl = null;
+
+function showPanel(key, triggerEl) {
+  if(activeEl) activeEl.classList.remove('active');
+  activeEl = triggerEl;
+  activeEl.classList.add('active');
+
+  // Remove existing panel content
+  panel.querySelectorAll('.panel-content').forEach(el => el.remove());
+  panelDefault.style.display = 'none';
+
+  const c = CONTENT[key];
+  const div = document.createElement('div');
+  div.className = 'panel-content active';
+
+  div.innerHTML = `
+    <div class="panel-badge" style="color:${c.color};border-color:${c.color}">
+      ${c.group} — ${c.groupLabel}
+    </div>
+    <div class="panel-role">${c.role}</div>
+    <p class="panel-hook">${c.hook}</p>
+    ${c.question ? `<p class="panel-question">${c.question}</p>` : ''}
+    <ul class="panel-list">
+      ${c.items.map(item => `
+        <li class="panel-list-item">
+          <span class="panel-dot" style="background:${c.color}"></span>
+          <span>${item}</span>
+        </li>`).join('')}
+    </ul>
+    <div class="panel-insight" style="border-color:${c.color};color:${c.color}">
+      ${c.insight}
+    </div>
+  `;
+
+  panel.appendChild(div);
+  requestAnimationFrame(() => requestAnimationFrame(() => div.classList.add('in')));
+  activeKey = key;
+
+  // On mobile, scroll panel into view
+  if(window.innerWidth <= 768) {
+    setTimeout(() => panel.scrollIntoView({behavior:'smooth', block:'start'}), 100);
+  }
+}
+
+/* ── BREAKDOWN CARDS ───────────────────────────────── */
+const breakdownGrid = document.getElementById('breakdown-grid');
+const ORDER = ['GK','DEF','DM','AM','ST'];
+const CARD_POS = {
+  GK: {pos:'GK', players:'1 player'},
+  DEF: {pos:'LB · LCB · RCB · RB', players:'4 players'},
+  DM: {pos:'LDM · RDM', players:'2 players'},
+  AM: {pos:'LAM · CAM · RAM', players:'3 players'},
+  ST: {pos:'ST', players:'1 player'}
+};
+
+ORDER.forEach((key, i) => {
+  const c = CONTENT[key];
+  const info = CARD_POS[key];
+  const card = document.createElement('div');
+  card.className = 'b-card reveal';
+  card.style.transitionDelay = i * 80 + 'ms';
+  card.style.borderLeftColor = c.color;
+  card.style.borderLeftWidth = '4px';
+  card.style.borderLeftStyle = 'solid';
+  card.innerHTML = `
+    <div class="b-card-left">
+      <div class="b-card-pos" style="color:${c.color}">${c.group}</div>
+      <div class="b-card-label">${info.pos}</div>
+    </div>
+    <div class="b-card-body">
+      <div class="b-card-title">${c.role}</div>
+      <div class="b-card-hook">${c.hook}</div>
+    </div>
+    <div class="b-card-arrow">→</div>
+  `;
+  card.addEventListener('click', () => {
+    document.getElementById('pitch-section').scrollIntoView({behavior:'smooth'});
+    const firstPlayer = PLAYERS.find(p => p.key === key);
+    if(firstPlayer) {
+      setTimeout(() => {
+        const el = document.getElementById('player-' + firstPlayer.id);
+        if(el) showPanel(key, el);
+      }, 600);
+    }
+  });
+  breakdownGrid.appendChild(card);
+});
+
+/* ── SCROLL REVEALS ────────────────────────────────── */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(!entry.isIntersecting) return;
+    entry.target.classList.add('in');
+    io.unobserve(entry.target);
+  });
+}, {threshold: 0.15});
+
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* ── PLAYER POP-IN ON SCROLL ────────────────────────── */
+const pitchObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(!entry.isIntersecting) return;
+    document.querySelectorAll('.player').forEach((p, i) => {
+      setTimeout(() => p.classList.add('in'), i * 90);
+    });
+    pitchObserver.unobserve(entry.target);
+  });
+}, {threshold: 0.3});
+
+pitchObserver.observe(pitch);
+
+/* ── NAV SCROLL ─────────────────────────────────────── */
+window.addEventListener('scroll', () => {
+  document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 60);
+}, {passive: true});
+</script>
+</body>
+</html>
